@@ -31,22 +31,27 @@ class Shop():
     def add_customer(self, lname, phonenumber):
         customerIDnumber = 0
         new_customer = Customer(lname, phonenumber)
-        IDnumber += 1
+        customerIDnumber += 1
         self.customer_list.append(new_customer)
-        print(f"ID number is {IDnumber}")
+        print(f"ID number is {customerIDnumber}")
 
     def add_rental(self, skies_rented, snowboards_rented, rental_length):
         rentalIDnumber = 0
         new_rental = Rental(skies_rented, snowboards_rented, rental_length)
-        IDnumber += 1
+        rentalIDnumber += 1
         self.customer_list.append(new_rental)
-        print(f"ID number is {IDnumber}")
+        print(f"ID number is {rentalIDnumber}")
 
-    def complete_rental(self, intRentalIID):
+    def complete_rental(self, intRentalID):
+        rental = self.find_rental(intRentalID)
         self.IsClosed = True
-        self.number_of_skis_in_inventory += 1
-        self.number_of_snowboards_in_inventory += 1
-        print("total charge is ")
+        self.number_of_skis_in_inventory += self.skies_rented
+        self.number_of_snowboards_in_inventory += self.snowboards_rented
+        charge = (self.skies_rented * 15) + (self.snowboards_rented * 10)
+        print(f"total charge is {charge}")
+
+    def setup_inventory(intNumberOfSkis, intNumberOfSnowboards):
+
 
 
 
