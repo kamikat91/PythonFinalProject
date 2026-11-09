@@ -42,7 +42,11 @@ class Shop():
         self.customer_list.append(new_rental)
         print(f"ID number is {IDnumber}")
 
-    def complete_rental(intRentalIID)
+    def complete_rental(self, intRentalIID):
+        self.IsClosed = True
+        self.number_of_skis_in_inventory += 1
+        self.number_of_snowboards_in_inventory += 1
+        print("total charge is ")
 
 
 
