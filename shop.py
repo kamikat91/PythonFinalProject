@@ -3,8 +3,7 @@ from rental import *
 
 class Shop():
     def __init__(self, number_of_skis_in_inventory, number_of_snowboards_in_inventory):
-        self.number_of_skis_in_inventory = number_of_skis_in_inventory
-        self.number_of_snowboards_in_inventory = number_of_snowboards_in_inventory
+        self.setup_inventory(number_of_skis_in_inventory, number_of_snowboards_in_inventory)
         self.customer_list = []
         self.rentals_list = []
         total_income = 0
@@ -23,34 +22,34 @@ class Shop():
             else:
                 return None
 
-    def find_rentals_for_customer(self, customerID):
+    def find_rentals_for_customer(self, customerIDnumber):
+        customers_rentals = []
         for rental in self.rentals_list:
-            if rental.rental_ID == customerID:
-                return rental
+            if rental.rental_ID == customerIDnumber:
+                customers_rentals.append(rental)
+        return customers_rentals
 
     def add_customer(self, lname, phonenumber):
-        customerIDnumber = 0
         new_customer = Customer(lname, phonenumber)
-        customerIDnumber += 1
         self.customer_list.append(new_customer)
-        print(f"ID number is {customerIDnumber}")
+        print(f"ID number is {new_customer.customerIDnumber}")
 
-    def add_rental(self, skies_rented, snowboards_rented, rental_length):
-        rentalIDnumber = 0
+    def add_rental(self, skies_rented, snowboards_rented, rental_length, customerIDnumber):
         new_rental = Rental(skies_rented, snowboards_rented, rental_length)
-        rentalIDnumber += 1
         self.customer_list.append(new_rental)
-        print(f"ID number is {rentalIDnumber}")
+        print(f"ID number is {new_rental.rentalIDnumber}")
 
     def complete_rental(self, intRentalID):
         rental = self.find_rental(intRentalID)
-        self.IsClosed = True
-        self.number_of_skis_in_inventory += self.skies_rented
-        self.number_of_snowboards_in_inventory += self.snowboards_rented
-        charge = (self.skies_rented * 15) + (self.snowboards_rented * 10)
+        rental.IsClosed = True
+        self.number_of_skis_in_inventory += rental.skies_rented
+        self.number_of_snowboards_in_inventory += rental.snowboards_rented
+        charge = (rental.skies_rented * 15) + (rental.snowboards_rented * 10)
         print(f"total charge is {charge}")
 
-    def setup_inventory(intNumberOfSkis, intNumberOfSnowboards):
+    def setup_inventory(self, intNumberOfSkis, intNumberOfSnowboards):
+        self.number_of_skis_in_inventory = intNumberOfSkis
+        self.number_of_snowboards_in_inventory = intNumberOfSnowboards
 
 
 
